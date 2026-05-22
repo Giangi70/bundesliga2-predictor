@@ -1,27 +1,47 @@
 # Bundesliga 2 Predictor
 
-Predice l'esito (1/X/2) delle partite di Bundesliga 2 usando le quote dei bookmaker.
+Predice l'esito (1/X/2) delle partite di **Bundesliga 2 tedesca** usando le quote dei bookmaker come feature per un modello ML (XGBoost).
 
-Parte dell'ecosistema Betting multi-sport. Vedi `BettingEcosystem.md`.
+Parte dell'ecosistema [Betting](https://github.com/Giangi70/betting-core) multi-sport.
+
+## Quick Start
+
+```bash
+git clone https://github.com/Giangi70/bundesliga2-predictor
+cd bundesliga2-predictor
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # inserisci ODDS_API_KEY (opzionale)
+./start.sh
+```
+
+L'app si apre su **http://localhost:8504**
 
 ## Dati
 
-- **Storici**: football-data.co.uk `D2.csv`, 9 stagioni (1617→2425), 2753 partite
-- **Live**: The Odds API `soccer_germany_bundesliga2`
-- **CV accuracy**: 41.1% — il più imprevedibile del gruppo
+- **Storici**: [football-data.co.uk](https://www.football-data.co.uk) — 9 stagioni (2016/17→2024/25), ~2750 partite
+- **Quote live**: [The Odds API](https://the-odds-api.com) — endpoint `soccer_germany_bundesliga2`
+- **CV accuracy modello**: ~41% (il più imprevedibile del gruppo)
 
-## Avvio
+## Funzionalità
 
-```bash
-./start.sh   # porta 8504
-```
+| Tab | Descrizione |
+|---|---|
+| 🔮 Predizioni giornata | Quote live → predizioni 1/X/2 con probabilità |
+| ✏️ Inserimento manuale | Inserisci quote a mano per una singola partita |
+| 🔄 Aggiorna dataset | Scarica nuovi dati e ri-addestra il modello |
+| 📊 Storico | Predizioni passate, risultati reali, ROI value bet |
+| 🎯 Strategia Mista | Segnali 9-safe+1-jolly con monitor ROI stagionale |
 
-## Differenze rispetto a seriea-predictor
+## Ecosistema
 
-| Parametro | Serie A | Bundesliga 2 |
+Questo progetto fa parte di un ecosistema multi-sport:
+
+| Progetto | Campionato | Porta |
 |---|---|---|
-| File CSV | `I1.csv` | `D2.csv` |
-| API endpoint | `soccer_italy_serie_a` | `soccer_germany_bundesliga2` |
-| Porta | 8501 | 8504 |
-| CV accuracy | ~51% | ~41% |
-| DB | `seriea.db` | `bundesliga2.db` |
+| [seriea-predictor](https://github.com/Giangi70/seriea-predictor) | Serie A Italia | 8501 |
+| [serieb-predictor](https://github.com/Giangi70/serieb-predictor) | Serie B Italia | 8502 |
+| [laliga2-predictor](https://github.com/Giangi70/laliga2-predictor) | La Liga 2 Spagna | 8503 |
+| [bundesliga2-predictor](https://github.com/Giangi70/bundesliga2-predictor) | Bundesliga 2 Germania | 8504 |
+| [betting-core](https://github.com/Giangi70/betting-core) | Libreria condivisa | — |
